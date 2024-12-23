@@ -15,22 +15,32 @@ do
     ARRAY+=("${i}")
 done
 
-python src/retrieve.py --target_name "${ARRAY[0]}" --outpath ${ARRAY[2]}
-
 if [ "${ARRAY[4]}" == "finetune.yaml" ]; then
     python -u train.py \
             --base configs/custom-diffusion/${ARRAY[4]}  \
-            -t --gpus 0,1 \
+            -t --gpus 0,1,2,3 \
             --resume-from-checkpoint-custom ${ARRAY[5]} \
             --caption "${ARRAY[0]}" \
             --datapath ${ARRAY[1]} \
             --reg_datapath "${ARRAY[2]}/images.txt" \
             --reg_caption "${ARRAY[2]}/caption.txt" \
             --name "${ARRAY[3]}-sdv4"
+
+elif [ "${ARRAY[4]}" == "finetune_addtoken.yaml" ]; then
+    python -u  train.py \
+        --base configs/custom-diffusion/${ARRAY[4]}  \
+        -t --gpus 0,1,2,3 \
+        --resume-from-checkpoint-custom ${ARRAY[5]} \
+        --caption "<new1> ${ARRAY[0]}" \
+        --datapath ${ARRAY[1]} \
+        --reg_datapath "${ARRAY[2]}/samples" \
+        --reg_caption "${ARRAY[0]}" \
+        --modifier_token "<new1>" \
+        --name "${ARRAY[3]}-sdv4"
 else
     python -u train.py \
             --base configs/custom-diffusion/${ARRAY[4]}  \
-            -t --gpus 0,1 \
+            -t --gpus 0,1,2,3 \
             --resume-from-checkpoint-custom ${ARRAY[5]} \
             --caption "<new1> ${ARRAY[0]}" \
             --datapath ${ARRAY[1]} \

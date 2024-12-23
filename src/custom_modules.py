@@ -305,7 +305,7 @@ class FrozenCLIPEmbedderWrapper(AbstractEncoder):
         tokens = tokens.view(-1, input_shape[-1])
 
         hidden_states = self.transformer.text_model.embeddings(input_ids=tokens)
-        hidden_states = (1-indices)*hidden_states.detach() + indices*hidden_states
+        hidden_states = (1-indices)*hidden_states.detach() + indices*hidden_states #使用布尔掩码 indices 来决定哪些嵌入向量需要保留梯度，哪些需要脱离梯度图。具体来说，新添加的令牌的嵌入向量保留梯度，其他令牌的嵌入向量脱离梯度图。
 
         z = self.custom_forward(hidden_states, tokens)
 

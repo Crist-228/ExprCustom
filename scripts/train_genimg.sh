@@ -15,17 +15,6 @@ do
     ARRAY+=("${i}")
 done
 
-
-python -u sample.py \
-        --n_samples 4 \
-        --n_iter 50 \
-        --scale 6 \
-        --ddim_steps 50  \
-        --ckpt ${ARRAY[5]} \
-        --ddim_eta 1. \
-        --outdir "${ARRAY[2]}" \
-        --prompt "photo of a ${ARRAY[0]}" 
-
 python -u  train.py \
         --base configs/custom-diffusion/${ARRAY[4]}  \
         -t --gpus 0,1,2,3 \

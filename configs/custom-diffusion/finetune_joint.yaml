@@ -158,17 +158,19 @@ model:
 data:
   target: train.DataModuleFromConfig
   params:
-    batch_size: 4
+    batch_size: 2
     num_workers: 4
     wrap: false
     train:
       target: src.finetune_data.MaskBase
       params:
         size: 512
+        repeat: 100
     train2:
       target: src.finetune_data.MaskBase
       params:
         size: 512
+        repeat: 100
 
 
 lightning:
@@ -181,4 +183,5 @@ lightning:
         increase_log_steps: False
 
   trainer:
-    max_steps: 550
+    max_steps: 750
+    accumulate_grad_batches: 4

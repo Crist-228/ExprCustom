@@ -1,0 +1,27 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File with Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "python": "/data/anaconda3/envs/ldm/bin/python",
+            "console": "integratedTerminal",
+            "args": [
+                "-u","--base","configs/custom-diffusion/finetune_addtoken.yaml",
+                "-t", "--gpus", "0,1",
+                "--resume-from-checkpoint-custom","stable-diffusion-v-1-4-original/sd-v1-4.ckpt",
+                "--caption", "<new1> man",
+                "--datapath","data/chris_pratt",
+                "--reg_datapath","real_reg/samples_chris_pratt/images.txt",
+                "--reg_caption","real_reg/samples_chris_pratt/caption.txt",
+                "--modifier_token","<new1>",
+                "--name","man-sdv4",
+            ]
+        }
+    ]
+}

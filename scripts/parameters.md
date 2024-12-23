@@ -1,0 +1,1 @@
+bash scripts/finetune_train.sh "man" data/chris_pratt real_reg/samples_chris_pratt  man finetune_addtoken.yaml stable-diffusion-v-1-4-original/sd-v1-4.ckpt

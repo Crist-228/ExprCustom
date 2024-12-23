@@ -315,6 +315,7 @@ class CustomDiffusion(LatentDiffusion):
                                            force_c_encode=True,
                                            return_original_cond=True,
                                            bs=N)
+        # x:输入的图像 z:encoder后的隐向量 c:单个条件模态，一般是caption xrec:用于直接输出重建图像 xc:批次的条件模态
         N = min(x.shape[0], N)
         n_row = min(x.shape[0], n_row)
         log["inputs"] = x

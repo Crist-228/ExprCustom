@@ -13,7 +13,7 @@ from clip_retrieval.clip_client import ClipClient
 
 def retrieve(target_name, outpath, num_class_images):
     num_images = 2*num_class_images
-    client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion_400m", num_images=num_images,  aesthetic_weight=0.1)
+    client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion5B-L-14", num_images=num_images,  aesthetic_weight=0.1)
 
     if len(target_name.split()):
         target = '_'.join(target_name.split())
@@ -30,7 +30,7 @@ def retrieve(target_name, outpath, num_class_images):
             break
         else:
             num_images = int(1.5*num_images)
-            client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion_400m", num_images=num_images,  aesthetic_weight=0.1)
+            client = ClipClient(url="https://knn.laion.ai/knn-service", indice_name="laion5B-L-14", num_images=num_images,  aesthetic_weight=0.1)
 
     count = 0
     urls = []

@@ -235,7 +235,7 @@ def main():
         help="unconditional guidance scale: eps = eps(x, empty) + scale * (eps(x, cond) - eps(x, empty))",
     )
     parser.add_argument(
-        "--from-file",
+        "--from_file",
         type=str,
         help="if specified, load prompts from this file",
     )
@@ -335,6 +335,13 @@ def main():
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     model = model.to(device)
 
+    with open('modules.txt', 'w') as f:
+        f.write("Model module names:\n")
+        for name, module in model.named_modules():
+            f.write(f"  Name: {name}, Type: {module.__class__.__name__}\n")
+
+    print("Module names have been saved to modules.txt")
+    
     if opt.plms:
         sampler = PLMSSampler(model)
     else:
