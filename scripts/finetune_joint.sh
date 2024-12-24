@@ -23,18 +23,28 @@ done
 # python src/retrieve.py --target_name "${ARRAY[3]}" --outpath ${ARRAY[5]}
 
 
+# python -u  train.py \
+#         --base configs/custom-diffusion/${ARRAY[7]}  \
+#         -t --gpus 0,1,2,3 \
+#         --resume-from-checkpoint-custom  ${ARRAY[8]} \
+#         --caption "<new1> ${ARRAY[0]}" \
+#         --datapath ${ARRAY[1]} \
+#         --reg_datapath "${ARRAY[2]}/images.txt" \
+#         --reg_caption "${ARRAY[2]}/caption.txt" \
+#         --caption2 "<new2> ${ARRAY[3]}" \
+#         --datapath2 ${ARRAY[4]} \
+#         --reg_datapath2 "${ARRAY[5]}/images.txt" \
+#         --reg_caption2 "${ARRAY[5]}/caption.txt" \
+#         --modifier_token "<new1>+<new2>" \
+#         --name "${ARRAY[6]}-sdv4"
+
 python -u  train.py \
         --base configs/custom-diffusion/${ARRAY[7]}  \
         -t --gpus 0,1,2,3 \
         --resume-from-checkpoint-custom  ${ARRAY[8]} \
         --caption "<new1> ${ARRAY[0]}" \
         --datapath ${ARRAY[1]} \
-        --reg_datapath "${ARRAY[2]}/images.txt" \
-        --reg_caption "${ARRAY[2]}/caption.txt" \
         --caption2 "<new2> ${ARRAY[3]}" \
         --datapath2 ${ARRAY[4]} \
-        --reg_datapath2 "${ARRAY[5]}/images.txt" \
-        --reg_caption2 "${ARRAY[5]}/caption.txt" \
         --modifier_token "<new1>+<new2>" \
         --name "${ARRAY[6]}-sdv4"
-

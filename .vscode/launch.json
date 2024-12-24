@@ -22,6 +22,30 @@
                 "--modifier_token","<new1>",
                 "--name","man-sdv4",
             ]
+        },
+        {
+            "name": "train multiconcept",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "python": "/data/anaconda3/envs/custom/bin/python",
+            "console": "integratedTerminal",
+            "args": [
+                "-u",
+                "--base", "configs/custom-diffusion/finetune_joint.yaml",
+                "-t", "--gpus", "0,1,2,3",
+                "--resume-from-checkpoint-custom", "stable-diffusion-v-1-4-original/sd-v1-4.ckpt",
+                "--caption", "<new1> man",
+                "--datapath", "data/chris_pratt",
+                "--reg_datapath", "real_reg/samples_chris_pratt/images.txt",
+                "--reg_caption", "real_reg/samples_chris_pratt/caption.txt",
+                "--caption2", "<new2> disgusted face",
+                "--datapath2", "data/disgusted_face",
+                "--reg_datapath2", "real_reg/samples_chris_pratt/images.txt",
+                "--reg_caption2", "real_reg/samples_chris_pratt/caption.txt",
+                "--modifier_token", "<new1>,<new2>",
+                "--name", "man+disgusted_face-sdv4"
+            ]
         }
     ]
 }
